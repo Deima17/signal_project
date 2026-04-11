@@ -2,8 +2,7 @@ package com.alerts;
 
 import com.data_management.DataStorage;
 import com.data_management.Patient;
-import com.data_management.PatientRecord;
-import java.util.List;
+
 /**
  * The {@code AlertGenerator} class is responsible for monitoring patient data
  * and generating alerts when certain predefined conditions are met. This class
@@ -49,14 +48,7 @@ public class AlertGenerator {
      */
     public void evaluateData(Patient patient) {
         // Implementation goes here
-	List<PatientRecord> records = patient.getRecords(startTime, endTime);
-	for (PatientRecord record : records) {
-		if (isAbnormal(record)) {
-			Alert alert = new Alert(patient.getPatientId(), record.getTimestamp(), 
-				"Abnormal " + record.getLabel(), record.getMeasurementValue());
-			triggerAlert(alert);
-		}
-	}
+	// TODO: implement alert conditions based on patient records
     }
 
     /**
