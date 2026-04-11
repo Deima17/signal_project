@@ -2,12 +2,20 @@ package com.alerts;
 
 import com.data_management.DataStorage;
 import com.data_management.Patient;
-
+import com.data_management.PatientRecord;
+import java.util.List;
 /**
  * The {@code AlertGenerator} class is responsible for monitoring patient data
  * and generating alerts when certain predefined conditions are met. This class
  * relies on a {@link DataStorage} instance to access patient data and evaluate
  * it against specific health criteria.
+* <p>Alert conditions may include:
+* <ul>
+*   <li>Abnormal vital signs (e.g., heart rate, blood pressure, saturation)</li>
+*   <li>Critical threshold violations</li>
+*   <li>Rapid changes in patient condition</li>
+* </ul>
+* <p>When an alert condition is detected, a {@link Alert} object is created and passed to {@link #triggerAlert(Alert)} for handling.
  */
 public class AlertGenerator {
     private DataStorage dataStorage;
@@ -31,22 +39,40 @@ public class AlertGenerator {
      * method. This method should define the specific conditions under which an
      * alert
      * will be triggered.
-     *
+* <p>This method should implement specific clinical rules such as:
+* <ul>
+*   <li>Heart rate below 60 or above 100 bpm</li>
+*   <li>Blood pressure outside normal ranges</li>
+*   <li>Blood saturation below 92%</li>
+* </ul>
      * @param patient the patient data to evaluate for alert conditions
      */
     public void evaluateData(Patient patient) {
         // Implementation goes here
+	List<PatientRecord> records = patient.getRecords(startTime, endTime);
+	for (PatientRecord record : records) {
+		if (isAbnormal(record)) {
+			Alert alert = new Alert(patient.getPatientId(), record.getTimestamp(), 
+				"Abnormal " + record.getLabel(), record.getMeasurementValue());
+			triggerAlert(alert);
+		}
+	}
     }
 
     /**
-     * Triggers an alert for the monitoring system. This method can be extended to
-     * notify medical staff, log the alert, or perform other actions. The method
-     * currently assumes that the alert information is fully formed when passed as
-     * an argument.
+     * Triggers an alert for the monitoring system. 
+* <p>This method can be extended to
+* <ul>     
+* 	<li>notify medical staff</li>
+*	<li>log the alert</li>
+*	<li>send alerts</li>
+*	<li>update a dashboard</li>
+* </ul>
      *
-     * @param alert the alert object containing details about the alert condition
+     * @param alert the alert object containing details about the alert condition (patient ID, timestamp, condition type, and measurement value)
      */
     private void triggerAlert(Alert alert) {
         // Implementation might involve logging the alert or notifying staff
+	// TODO: implement alert handling logic
     }
 }
