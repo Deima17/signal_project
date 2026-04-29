@@ -12,11 +12,23 @@ public class AlertGenerator implements PatientDataGenerator {
     public static final Random randomGenerator = new Random();
     private boolean[] alertStates; // false = resolved, true = pressed
 
+    /**
+    * constructs an {@code AlertGenerator} for the given number of patients
+    * @param patientCount the number of patients to monitor and determines the size of the internal alert state array
+    */
     public AlertGenerator(int patientCount) {
         alertStates = new boolean[patientCount + 1];
     }
 
-    @Override
+    /**
+     * Generates an alert event for the specified patient.
+     * <p>If an alert is currently active, there is a 90% chance it will be resolved, otherwise, a new alert may be triggered based on a Poisson probability model.
+     *
+     * @param patientId 
+     * @param outputStrategy used to send the alert data
+     * @throws Exception if an error occurs during alert data generation
+     */
+        @Override
     public void generate(int patientId, OutputStrategy outputStrategy) {
         try {
             if (alertStates[patientId]) {
