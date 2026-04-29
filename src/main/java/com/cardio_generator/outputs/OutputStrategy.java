@@ -17,10 +17,10 @@ public interface OutputStrategy {
      * (e.g., ConsoleOutputStrategy prints to System.out, FileOutputStrategy writes
      * to a file, TcpOutputStrategy sends over a network socket).
      *
-     * @param patientId  the unique identifier of the patient (positive integer)
-     * @param timestamp  the time when the data was generated (milliseconds since Unix epoch)
-     * @param label      the type of measurement (e.g., "ECG", "BloodPressure", "Alert")
-     * @param data       the actual measurement value or alert status as a string
+     * @param patientId positive integer
+     * @param timestamp the time when the data was generated (milliseconds since Unix epoch)
+     * @param label the type of measurement ("ECG", "BloodPressure", "Alert")
+     * @param data the actual measurement value or alert status as a string
      */
-void output(int patientId, long timestamp, String label, String data);
+    void output(int patientId, long timestamp, String label, String data);
 }
