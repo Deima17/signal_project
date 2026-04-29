@@ -5,7 +5,7 @@ import java.util.Random;
 import com.cardio_generator.outputs.OutputStrategy;
 /**
 *Generates random alert events for simulated patients.
-*This class creates alerts that can be triggered or resolved based or probabilistic timing to simulate real-world medical alert scenarios. 
+*<p> Alerts are triggered or resolved based or probabilistic timing to simulate real-world medical alert scenarios. 
 */
 public class AlertGenerator implements PatientDataGenerator {
 
