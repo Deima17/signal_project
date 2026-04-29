@@ -27,7 +27,10 @@ import java.util.ArrayList;
 
 /**
 * Main entry point for the Cardio Data Simulator application.
-* <p>This class orchestrates the simulation of real-time cardiovascular data for multiple patients. It generates various health metrics including ECG, blood pressure, blood saturation, and blood levels, and outputs them using a configurable strategy (console, file, WebSocket, or TCP).
+*
+* <p>This class orchestrates the simulation of real-time cardiovascular data for multiple patients. 
+* It generates various health metrics including ECG, blood pressure, blood saturation, and blood levels, and outputs them using a configurable strategy (console, file, WebSocket, or TCP).
+* 
 * <p>Example usage:
 * <pre>
 * java HealthDataSimulator --patient-count 100 --output websocket:8080
@@ -42,6 +45,7 @@ public class HealthDataSimulator {
 
 /**
 * The main method that starts the data simulation.
+*
 * @param args command line arguments for configuring the simulation
 * @throws IOException if an error occurs while creating output directories
 */
@@ -59,12 +63,14 @@ public class HealthDataSimulator {
 
 /**
 * Parses command line arguments to configure the simulation.
+*
 * <p>Supported options:
 * <ul>
 *   <li>-h : Show help and exit</li>
 *   <li>--patient-count &lt;count&gt; : Number of patients (default: 50)</li>
 *   <li>--output &lt;type&gt; : Output method (console, file:&lt;dir&gt;, websocket:&lt;port&gt;, tcp:&lt;port&gt;)</li>
 * </ul>
+*
 * @param args the command line arguments array
 * @throws IOException if file output directory cannot be created
 */
@@ -149,6 +155,7 @@ public class HealthDataSimulator {
     }
 /**
 * Creates a list of patient IDs from 1 to patientCount
+*
 * @param patientCount the number of patients to generate IDs for
 * @return a list of patient IDs as integers
 */
@@ -161,6 +168,7 @@ public class HealthDataSimulator {
     }
 /**
 * Schedules data generation tasks for all patients.
+*
 * <p>Each patient gets scheduled tasks for different data types at varying intervals:
 * <ul>
 *   <li>ECG and Blood Saturation: every 1 second</li>
@@ -168,6 +176,7 @@ public class HealthDataSimulator {
 *   <li>Blood Levels: every 2 minutes</li>
 *   <li>Alerts: every 20 seconds</li>
 * </ul>
+*
 * @param patientIds the list of patient IDs to schedule tasks for
 */
     private static void scheduleTasksForPatients(List<Integer> patientIds) {
@@ -187,9 +196,11 @@ public class HealthDataSimulator {
     }
 /**
 * Schedules a recurring task with a random initial delay.
+*
 * <p>The initial delay is randomized between 0-5 seconds to prevent all tasks from executing simultaneously.
-* @param task     the runnable task to execute
-* @param period   the time between successive executions
+*
+* @param task the runnable task to execute
+* @param period the time between successive executions
 * @param timeUnit the time unit for the period parameter
 */
     private static void scheduleTask(Runnable task, long period, TimeUnit timeUnit) {
