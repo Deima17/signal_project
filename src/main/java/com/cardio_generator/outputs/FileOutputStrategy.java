@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileOutputStrategy implements OutputStrategy {
 
     private String baseDirectory;
-    public final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
 
     /**
      * Constructs a new file output strategy that writes to the specified directory.
@@ -58,7 +58,7 @@ public class FileOutputStrategy implements OutputStrategy {
         }
         
         // Determine the file path for this label
-        String filePath = fileMap.computeIfAbsent(label, k -> Paths.get(baseDirectory, label + ".txt").toString());
+        String filePath = fileMap.computeIfAbsent(label, labelKey -> Paths.get(baseDirectory, labelKey + ".txt").toString());
 
         // Write the data to the file
         try (PrintWriter out = new PrintWriter(
