@@ -255,6 +255,53 @@ class AlertGeneratorTest {
         Patient patient = new Patient(99);
         assertEquals(0, patient.getRecords(0L, 9999L).size());
     }
+    /**
+     * Verifies addPatientData creates a new patient if one doesn't exist.
+     */
+    @Test
+    void testAddPatientDataCreatesNewPatient() {
+        storage.addPatientData(1, 120, "SystolicPressure", 1000L);
+        assertEquals(1, storage.getAllPatients().size());
+    }
+
+    /**
+     * Verifies addPatientData adds records to an existing patient.
+     */
+    @Test
+    void testAddPatientDataAppendsToExistingPatient() {
+        storage.addPatientData(1, 120, "SystolicPressure", 1000L);
+        storage.addPatientData(1, 130, "SystolicPressure", 2000L);
+        assertEquals(1, storage.getAllPatients().size());
+        assertEquals(2, storage.getRecords(1, 0, 9999L).size());
+    }
+
+    /**
+     * Verifies getRecords returns correct records for a patient within time range.
+     */
+    @Test
+    void testDataStorageGetRecordsInRange() {
+        storage.addPatientData(1, 120, "SystolicPressure", 1000L);
+        storage.addPatientData(1, 130, "SystolicPressure", 5000L);
+        assertEquals(1, storage.getRecords(1, 0, 2000L).size());
+    }
+
+    /**
+     * Verifies getRecords returns empty list for unknown patient.
+     */
+    @Test
+    void testDataStorageGetRecordsUnknownPatient() {
+        assertEquals(0, storage.getRecords(99, 0, 9999L).size());
+    }
+
+    /**
+     * Verifies getAllPatients returns all added patients.
+     */
+    @Test
+    void testGetAllPatients() {
+        storage.addPatientData(1, 120, "SystolicPressure", 1000L);
+        storage.addPatientData(2, 80, "DiastolicPressure", 1000L);
+        assertEquals(2, storage.getAllPatients().size());
+    }
 
     /**
      * Checks whether any alert in the list contains the given keyword in its condition.

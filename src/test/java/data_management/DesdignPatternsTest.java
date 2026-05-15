@@ -35,7 +35,7 @@ class DesignPatternsTest {
         storage = new DataStorage();
     }
 
-    //Factory 
+    //Factory
 
     /**
      * Verifies BloodPressureAlertFactory creates an alert with correct prefix.
