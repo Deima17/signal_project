@@ -75,7 +75,7 @@ class DesignPatternsTest {
     void testBloodPressureStrategyHighSystolic() {
         storage.addPatientData(1, 185, "SystolicPressure", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new BloodPressureStrategy().check(patient);
+        List<Alert> alerts = new BloodPressureStrategy().checkAlert(patient);
         assertTrue(alerts.stream().anyMatch(a -> a.getCondition().contains("Critical Systolic High")));
     }
 
@@ -86,7 +86,7 @@ class DesignPatternsTest {
     void testBloodPressureStrategyNoAlert() {
         storage.addPatientData(1, 120, "SystolicPressure", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new BloodPressureStrategy().check(patient);
+        List<Alert> alerts = new BloodPressureStrategy().checkAlert(patient);
         assertTrue(alerts.isEmpty());
     }
 
@@ -97,7 +97,7 @@ class DesignPatternsTest {
     void testOxygenSaturationStrategyLow() {
         storage.addPatientData(1, 89, "Saturation", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new OxygenSaturationStrategy().check(patient);
+        List<Alert> alerts = new OxygenSaturationStrategy().checkAlert(patient);
         assertTrue(alerts.stream().anyMatch(a -> a.getCondition().contains("Low Saturation")));
     }
 
@@ -108,7 +108,7 @@ class DesignPatternsTest {
     void testHeartRateStrategyHigh() {
         storage.addPatientData(1, 110, "HeartRate", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new HeartRateStrategy().check(patient);
+        List<Alert> alerts = new HeartRateStrategy().checkAlert(patient);
         assertTrue(alerts.stream().anyMatch(a -> a.getCondition().contains("High Heart Rate")));
     }
 
@@ -119,7 +119,7 @@ class DesignPatternsTest {
     void testHeartRateStrategyLow() {
         storage.addPatientData(1, 45, "HeartRate", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new HeartRateStrategy().check(patient);
+        List<Alert> alerts = new HeartRateStrategy().checkAlert(patient);
         assertTrue(alerts.stream().anyMatch(a -> a.getCondition().contains("Low Heart Rate")));
     }
 
@@ -130,7 +130,7 @@ class DesignPatternsTest {
     void testHeartRateStrategyNormal() {
         storage.addPatientData(1, 75, "HeartRate", 1000L);
         Patient patient = storage.getAllPatients().get(0);
-        List<Alert> alerts = new HeartRateStrategy().check(patient);
+        List<Alert> alerts = new HeartRateStrategy().checkAlert(patient);
         assertTrue(alerts.isEmpty());
     }
 
