@@ -21,7 +21,7 @@ public class OxygenSaturationStrategy implements AlertStrategy {
      * @return a list of oxygen saturation alerts triggered
      */
     @Override
-    public List<Alert> check(Patient patient) {
+    public List<Alert> checkAlert(Patient patient) {
         List<Alert> alerts = new ArrayList<>();
         long now = System.currentTimeMillis();
         long tenMinutesAgo = now - 10 * 60 * 1000;
