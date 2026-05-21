@@ -17,5 +17,5 @@ public interface AlertStrategy {
      * @param patient the patient to evaluate
      * @return a list of alerts triggered, or an empty list if none
      */
-    List<Alert> check(Patient patient);
+    List<Alert> checkAlert(Patient patient);
 }
