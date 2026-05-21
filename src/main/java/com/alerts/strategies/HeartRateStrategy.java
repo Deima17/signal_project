@@ -19,7 +19,7 @@ public class HeartRateStrategy implements AlertStrategy {
      * @return a list of heart rate alerts triggered
      */
     @Override
-    public List<Alert> check(Patient patient) {
+    public List<Alert> checkAlert(Patient patient) {
         List<Alert> alerts = new ArrayList<>();
         long now = System.currentTimeMillis();
         List<PatientRecord> records = patient.getRecords(0, now);
